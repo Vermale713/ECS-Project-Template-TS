@@ -28,6 +28,7 @@
     "@rbxts/jabby": "^0.2.0-rc.8",
     "@rbxts/jecs": "^0.5.3",
     "@rbxts/planck": "^0.1.3-rc.1",
-    "@rbxts/planck-hooks": "^0.0.2-rc.3"
+    "@rbxts/planck-jabby": "^0.1.0-rc.6",
+    "@rbxts/services": "^1.5.5"
   }
 }
