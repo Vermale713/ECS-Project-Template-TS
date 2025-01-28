@@ -2,6 +2,9 @@ import jabby from "@rbxts/jabby";
 import { scheduler } from "./scheduler";
 import { ContextActionService, Players, RunService } from "@rbxts/services";
 
+const GROUP_NUMBER = 34902540;
+const GROUP_RANK = 250;
+
 export function Start(children: Instance[] | undefined) {
 	children?.forEach((module, index) => {
 		if (classIs(module, "ModuleScript")) {
@@ -11,7 +14,10 @@ export function Start(children: Instance[] | undefined) {
 	});
 	scheduler.runAll();
 	jabby.set_check_function((player) => {
-		return true;
+		if (player.GetRankInGroup(GROUP_NUMBER) > GROUP_RANK) {
+			return true;
+		}
+		return false;
 	});
 	if (RunService.IsClient()) {
 		const player = Players.LocalPlayer;
