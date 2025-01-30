@@ -16,7 +16,7 @@ function onPlayerAdded(world: World) {
 	for (const [id, player] of addedEvents) {
 		const [playerEntity] = ref(player.UserId);
 		world.set(playerEntity, Player, player);
-		world.set(playerEntity, Data, { coin: 1 });
+		world.set(playerEntity, Data, { coin: 1 }); // Replace with actual data
 		connections.set(
 			playerEntity,
 			player.CharacterAdded.Connect((rig) => {

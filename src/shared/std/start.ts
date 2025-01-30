@@ -1,9 +1,11 @@
 import jabby from "@rbxts/jabby";
 import { scheduler } from "./scheduler";
 import { ContextActionService, Players, RunService } from "@rbxts/services";
+import { world } from "./world";
+import PlankJabbyPlugin from "@rbxts/planck-jabby";
 
-const GROUP_NUMBER = 34902540;
-const GROUP_RANK = 250;
+const GROUP_NUMBER = 1; // Change to groups id
+const GROUP_RANK = 250; // Change to desired rank
 
 export function Start(children: Instance[] | undefined) {
 	children?.forEach((module, index) => {
@@ -13,15 +15,23 @@ export function Start(children: Instance[] | undefined) {
 		}
 	});
 	scheduler.runAll();
+	// Jabby debug
 	jabby.set_check_function((player) => {
 		if (player.GetRankInGroup(GROUP_NUMBER) > GROUP_RANK) {
 			return true;
 		}
 		return false;
 	});
+	jabby.register({
+		applet: jabby.applets.world,
+		name: "world",
+		configuration: {
+			world: world,
+		},
+	});
+	scheduler.addPlugin(new PlankJabbyPlugin());
+
 	if (RunService.IsClient()) {
-		const player = Players.LocalPlayer;
-		const playerGui = player.WaitForChild("PlayerGui");
 		const client = jabby.obtain_client();
 
 		function startJabby(name: string, state: Enum.UserInputState) {
